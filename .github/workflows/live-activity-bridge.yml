@@ -15,7 +15,6 @@ on:
       - "Swift CI"
       - "SwiftLint"
     types:
-      - requested
       - in_progress
       - completed
 
