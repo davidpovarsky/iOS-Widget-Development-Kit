@@ -3,13 +3,30 @@ on:
   pull_request:
     paths: ['**/*.md']
 permissions:
+  actions: read
   contents: read
   pull-requests: write
 jobs:
   lychee:
     runs-on: ubuntu-latest
     steps:
+      - name: Live Activity · refresh
+        uses: davidpovarsky/github-automation/live-refresh@main
+        continue-on-error: true
+        with:
+          event: refresh
+          device_id: ${{ secrets.NOTIFY_DEVICE_ID }}
+          token: ${{ secrets.NOTIFY_DEVICE_TOKEN }}
+          github_token: ${{ github.token }}
       - uses: actions/checkout@v4
+      - name: Live Activity · refresh
+        uses: davidpovarsky/github-automation/live-refresh@main
+        continue-on-error: true
+        with:
+          event: refresh
+          device_id: ${{ secrets.NOTIFY_DEVICE_ID }}
+          token: ${{ secrets.NOTIFY_DEVICE_TOKEN }}
+          github_token: ${{ github.token }}
       - uses: lycheeverse/lychee-action@v1
         with:
           args: --verbose --no-progress --require-https --max-redirects 5 --retry-wait-time 2 --timeout 20s --exclude-private true **/*.md
