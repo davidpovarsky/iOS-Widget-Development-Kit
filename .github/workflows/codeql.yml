@@ -14,8 +14,32 @@ jobs:
       security-events: write
     runs-on: macos-14
     steps:
+      - name: Live Activity · refresh
+        uses: davidpovarsky/github-automation/live-refresh@main
+        continue-on-error: true
+        with:
+          event: refresh
+          device_id: ${{ secrets.NOTIFY_DEVICE_ID }}
+          token: ${{ secrets.NOTIFY_DEVICE_TOKEN }}
+          github_token: ${{ github.token }}
       - uses: actions/checkout@v4
+      - name: Live Activity · refresh
+        uses: davidpovarsky/github-automation/live-refresh@main
+        continue-on-error: true
+        with:
+          event: refresh
+          device_id: ${{ secrets.NOTIFY_DEVICE_ID }}
+          token: ${{ secrets.NOTIFY_DEVICE_TOKEN }}
+          github_token: ${{ github.token }}
       - uses: github/codeql-action/init@v3
         with:
           languages: swift
+      - name: Live Activity · refresh
+        uses: davidpovarsky/github-automation/live-refresh@main
+        continue-on-error: true
+        with:
+          event: refresh
+          device_id: ${{ secrets.NOTIFY_DEVICE_ID }}
+          token: ${{ secrets.NOTIFY_DEVICE_TOKEN }}
+          github_token: ${{ github.token }}
       - uses: github/codeql-action/analyze@v3
